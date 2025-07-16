@@ -1,0 +1,74 @@
+[
+    {
+        "merged": "com.lucbo.phone.app-merged_res-32:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.lucbo.phone.app-main-34:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.lucbo.phone.app-merged_res-32:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.lucbo.phone.app-main-34:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.lucbo.phone.app-merged_res-32:/drawable_round_record_button_modern.xml.flat",
+        "source": "com.lucbo.phone.app-main-34:/drawable/round_record_button_modern.xml"
+    },
+    {
+        "merged": "com.lucbo.phone.app-merged_res-32:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.lucbo.phone.app-main-34:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.lucbo.phone.app-merged_res-32:/drawable_ic_stop.xml.flat",
+        "source": "com.lucbo.phone.app-main-34:/drawable/ic_stop.xml"
+    },
+    {
+        "merged": "com.lucbo.phone.app-merged_res-32:/drawable_ic_folder.xml.flat",
+        "source": "com.lucbo.phone.app-main-34:/drawable/ic_folder.xml"
+    },
+    {
+        "merged": "com.lucbo.phone.app-merged_res-32:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.lucbo.phone.app-main-34:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.lucbo.phone.app-merged_res-32:/layout_activity_main.xml.flat",
+        "source": "com.lucbo.phone.app-main-34:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.lucbo.phone.app-merged_res-32:/xml_file_paths.xml.flat",
+        "source": "com.lucbo.phone.app-main-34:/xml/file_paths.xml"
+    },
+    {
+        "merged": "com.lucbo.phone.app-merged_res-32:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.lucbo.phone.app-main-34:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.lucbo.phone.app-merged_res-32:/drawable_ic_record.xml.flat",
+        "source": "com.lucbo.phone.app-main-34:/drawable/ic_record.xml"
+    },
+    {
+        "merged": "com.lucbo.phone.app-merged_res-32:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.lucbo.phone.app-main-34:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.lucbo.phone.app-merged_res-32:/layout_video_item.xml.flat",
+        "source": "com.lucbo.phone.app-main-34:/layout/video_item.xml"
+    },
+    {
+        "merged": "com.lucbo.phone.app-merged_res-32:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.lucbo.phone.app-main-34:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.lucbo.phone.app-merged_res-32:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.lucbo.phone.app-main-34:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.lucbo.phone.app-merged_res-32:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.lucbo.phone.app-main-34:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.lucbo.phone.app-merged_res-32:/drawable_round_record_button.xml.flat",
+        "source": "com.lucbo.phone.app-main-34:/drawable/round_record_button.xml"
+    },
+    {
+        "merged": "com.lucbo.phone.app-merged_res-32:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.lucbo.phone.app-main-34:/mipmap-mdpi/ic_launcher_round.png"
+    }
+]

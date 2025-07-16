@@ -1,0 +1,4 @@
+#Tue Jul 15 23:26:19 CEST 2025
+base.0=C\:\\Users\\lucbo\\Desktop\\phone\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\0\\classes.dex
+path.0=0/classes.dex
+renamed.0=classes.dex

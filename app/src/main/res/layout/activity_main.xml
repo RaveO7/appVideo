@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/black">
+
+    <!-- Aperçu caméra occupe tout l'espace au-dessus des boutons -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <SurfaceView
+            android:id="@+id/cameraPreview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Statut : prêt"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:background="#66000000"
+            android:padding="8dp"
+            android:layout_gravity="top|start"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="24dp" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical|center_horizontal"
+        android:background="#66000000">
+
+        <ImageButton
+            android:id="@+id/btnFolder"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_folder"
+            android:contentDescription="Ouvrir le dossier vidéos"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="24dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/btnStartStop"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/round_record_button_modern"
+            android:src="@drawable/ic_record"
+            android:contentDescription="Enregistrer"
+            android:layout_gravity="center" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btnSettings"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="⚙"
+            android:textSize="22sp"
+            android:background="@android:color/transparent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="24dp" />
+    </LinearLayout>
+
+</LinearLayout> 

@@ -1,0 +1,4 @@
+com.lucbo.phone.test.app-androidTest-0 C:\Users\lucbo\Desktop\phone\app\build\generated\res\resValues\androidTest\debug
+com.lucbo.phone.test.app-mergeDebugAndroidTestResources-1 C:\Users\lucbo\Desktop\phone\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.lucbo.phone.test.app-mergeDebugAndroidTestResources-2 C:\Users\lucbo\Desktop\phone\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.lucbo.phone.test.app-merged_res-3 C:\Users\lucbo\Desktop\phone\app\build\intermediates\merged_res\debugAndroidTest
