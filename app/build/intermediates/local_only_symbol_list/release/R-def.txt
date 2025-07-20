@@ -1,0 +1,29 @@
+R_DEF: Internal format may change without notice
+local
+color colorAccent
+color colorBackground
+color colorCard
+color colorError
+color colorPrimary
+color colorPrimaryDark
+color colorText
+color colorTextSecondary
+drawable ic_folder
+drawable ic_record
+drawable ic_stop
+drawable round_record_button
+drawable round_record_button_modern
+id btnFolder
+id btnSettings
+id btnStartStop
+id cameraPreview
+id statusText
+id video_date
+id video_duration
+id video_thumbnail
+layout activity_main
+layout video_item
+mipmap ic_launcher
+mipmap ic_launcher_round
+style AppTheme
+xml file_paths

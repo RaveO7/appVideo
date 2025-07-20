@@ -41,12 +41,12 @@ class VideoTileService : TileService() {
     private fun startRecording(context: Context) {
         val intent = Intent(context, VideoRecordService::class.java)
         intent.action = VideoRecordService.ACTION_START_RECORDING
-        context.startService(intent)
+        context.startForegroundService(intent)
     }
 
     private fun stopRecording(context: Context) {
         val intent = Intent(context, VideoRecordService::class.java)
         intent.action = VideoRecordService.ACTION_STOP_RECORDING
-        context.startService(intent)
+        context.startForegroundService(intent)
     }
 } 
