@@ -40,14 +40,9 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Appliquer le mode sombre si activé
-        val prefs = getSharedPreferences("settings", MODE_PRIVATE)
-        val darkMode = prefs.getBoolean("dark_mode", false)
-        AppCompatDelegate.setDefaultNightMode(
-            if (darkMode) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
-        )
-
+        // Forcer le mode sombre
+        androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES)
+        
         val scroll = ScrollView(this)
         val layout = LinearLayout(this)
         layout.orientation = LinearLayout.VERTICAL
@@ -218,21 +213,6 @@ class SettingsActivity : AppCompatActivity() {
         versionView.setTextColor(Color.parseColor("#22223B"))
         aboutCard.addView(versionView)
 
-        // Politique de confidentialité
-        val btnPrivacy = Button(this)
-        btnPrivacy.text = "Politique de confidentialité"
-        btnPrivacy.setBackgroundColor(Color.parseColor("#4F8EF7"))
-        btnPrivacy.setTextColor(Color.WHITE)
-        btnPrivacy.setOnClickListener {
-            val url = "https://www.example.com/privacy" // Remplace par ton vrai lien
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
-        }
-        val privacyParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-        privacyParams.setMargins(0, 24, 0, 0)
-        btnPrivacy.layoutParams = privacyParams
-        aboutCard.addView(btnPrivacy)
-
         // Contact support
         val btnSupport = Button(this)
         btnSupport.text = "Contact support"
@@ -249,28 +229,6 @@ class SettingsActivity : AppCompatActivity() {
         btnSupport.layoutParams = supportParams
         aboutCard.addView(btnSupport)
 
-        // Switch thème sombre
-        val themeLayout = LinearLayout(this)
-        themeLayout.orientation = LinearLayout.HORIZONTAL
-        themeLayout.gravity = Gravity.CENTER_VERTICAL
-        themeLayout.setPadding(0, 24, 0, 0)
-        val themeLabel = TextView(this)
-        themeLabel.text = "Mode sombre"
-        themeLabel.textSize = 16f
-        themeLabel.setTextColor(Color.parseColor("#22223B"))
-        val themeSwitch = android.widget.Switch(this)
-        themeSwitch.isChecked = darkMode
-        themeSwitch.setPadding(32, 0, 0, 0)
-        themeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            prefs.edit().putBoolean("dark_mode", isChecked).apply()
-            AppCompatDelegate.setDefaultNightMode(
-                if (isChecked) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
-            )
-        }
-        themeLayout.addView(themeLabel)
-        themeLayout.addView(themeSwitch)
-        aboutCard.addView(themeLayout)
-
         // Place the scroll in a parent layout with the Retour button at the bottom
         val parent = LinearLayout(this)
         parent.orientation = LinearLayout.VERTICAL
@@ -286,11 +244,14 @@ class SettingsActivity : AppCompatActivity() {
         val btnRetour = Button(this)
         btnRetour.text = "Retour"
         btnRetour.textSize = 17f
-        btnRetour.setBackgroundColor(Color.parseColor("#22223B"))
+        btnRetour.setBackgroundResource(R.drawable.btn_retour_skeuo)
         btnRetour.setTextColor(Color.WHITE)
+        btnRetour.setPadding(48, 24, 48, 24)
+        btnRetour.elevation = 16f
         btnRetour.setOnClickListener { finish() }
-        val retourParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        val retourParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         retourParams.setMargins(0, 40, 0, 40)
+        retourParams.gravity = Gravity.CENTER_HORIZONTAL
         btnRetour.layoutParams = retourParams
         parent.addView(btnRetour)
 

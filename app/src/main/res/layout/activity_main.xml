@@ -40,9 +40,9 @@
 
         <ImageButton
             android:id="@+id/btnFolder"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:background="@android:color/transparent"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/round_gray_button"
             android:src="@drawable/ic_folder"
             android:contentDescription="Ouvrir le dossier vidéos"
             android:layout_gravity="center_vertical"
@@ -73,7 +73,7 @@
             android:layout_height="48dp"
             android:text="⚙"
             android:textSize="22sp"
-            android:background="@android:color/transparent"
+            android:background="@drawable/round_gray_button"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="24dp" />
     </LinearLayout>

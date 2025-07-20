@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Politique de Confidentialité"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginBottom="12dp"/>
+
+    <TextView
+        android:id="@+id/text_welcome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bienvenue dans notre application. Votre vie privée est importante pour nous. Veuillez lire attentivement cette politique de confidentialité avant d’utiliser l’application. En utilisant l’application, vous acceptez les pratiques décrites ci-dessous."
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
+        android:linksClickable="true"
+        android:textIsSelectable="false"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/scroll_policy"
+        android:layout_marginBottom="8dp">
+        <TextView
+            android:id="@+id/text_policy_full"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Collecte et utilisation des données\nNotre application ne collecte aucune donnée personnelle telle que votre nom, adresse e-mail ou numéro de téléphone, sauf si cela est nécessaire pour l’utilisation du service de stockage cloud (voir section 4).\n\n2. Accès aux fichiers et stockage local\nL’application accède à la mémoire de votre appareil pour enregistrer, lire et gérer des vidéos. Ces vidéos sont stockées localement sur votre appareil, sauf si vous choisissez de les héberger dans le cloud.\n\n3. Enregistrement vidéo\nL’application permet d’enregistrer des vidéos à l’aide de la caméra de votre appareil. Les vidéos enregistrées sont stockées uniquement sur votre appareil, sauf si vous choisissez de les transférer vers le cloud.\n\n4. Hébergement des vidéos dans le cloud\nL’application offre la possibilité d’héberger vos vidéos dans un service de stockage cloud. Si vous choisissez cette option :\n- Les vidéos sélectionnées seront transférées et stockées sur des serveurs sécurisés.\n- Selon le service cloud utilisé, il pourra vous être demandé de vous connecter ou de fournir certaines informations personnelles (par exemple, une adresse e-mail).\n- Les vidéos hébergées dans le cloud pourront être consultées et téléchargées depuis n’importe quel appareil connecté à votre compte cloud.\n- Nous nous engageons à sécuriser le transfert et le stockage de vos vidéos dans le cloud.\n\n5. Galerie vidéo\nL’application propose une galerie pour visualiser les vidéos enregistrées, qu’elles soient stockées localement ou dans le cloud. Aucune information sur ces vidéos n’est partagée avec des tiers sans votre consentement.\n\n6. Lecture vidéo\nVous pouvez lire les vidéos enregistrées directement depuis l’application, qu’elles soient stockées localement ou dans le cloud. Aucune donnée n’est transmise à des tiers lors de la lecture.\n\n7. Services en arrière-plan\nL’application peut utiliser des services en arrière-plan pour l’enregistrement, la gestion ou le transfert des vidéos. Ces services n’accèdent à aucune donnée personnelle autre que celles nécessaires au fonctionnement du service cloud.\n\n8. Permissions requises\nPour fonctionner correctement, l’application requiert les permissions suivantes :\n- Accès à la caméra (pour enregistrer des vidéos)\n- Accès au stockage (pour enregistrer, lire et transférer des vidéos)\n- Accès à Internet (pour transférer et accéder aux vidéos dans le cloud)\n\n9. Sécurité\nNous nous engageons à protéger vos données. Toutes les vidéos et informations restent confidentielles et sécurisées, que ce soit localement ou dans le cloud.\n\n10. Modifications de la politique de confidentialité\nNous pouvons mettre à jour cette politique de confidentialité à tout moment. Toute modification sera affichée dans l’application.\n\n11. Contact\nPour toute question concernant cette politique de confidentialité, veuillez nous contacter à l’adresse suivante : [votre email de contact].\n\nEn utilisant cette application, vous reconnaissez avoir lu et accepté cette politique de confidentialité."
+            android:textSize="16sp"
+            android:lineSpacingExtra="4dp"/>
+    </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="bottom">
+
+        <Button
+            android:id="@+id/button_accept"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Accepter"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/button_decline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Refuser"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
+</LinearLayout> 

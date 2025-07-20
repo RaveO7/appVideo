@@ -37,6 +37,7 @@ import android.widget.ImageButton
 import androidx.core.content.FileProvider
 import android.widget.FrameLayout
 import android.view.View
+import android.provider.Settings
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,6 +57,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Forcer le mode sombre
+        androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES)
+        // Vérifier l'acceptation de la politique de confidentialité
+        if (!PrivacyPolicyActivity.isPolicyAccepted(this)) {
+            val intent = Intent(this, PrivacyPolicyActivity::class.java)
+            startActivity(intent)
+            finish()
+            return
+        }
         // Masquer la barre d'état et la barre de navigation pour une expérience plein écran
         window.decorView.systemUiVisibility = (
             View.SYSTEM_UI_FLAG_FULLSCREEN or
@@ -183,6 +193,10 @@ class MainActivity : AppCompatActivity() {
                 openCamera()
             } else {
                 statusText.text = "Statut : Permissions requises"
+                Toast.makeText(this, "Vous devez accepter toutes les permissions pour utiliser l'application.", Toast.LENGTH_LONG).show()
+                // Ouvre la page paramètres personnalisée de l'application
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
             }
         }
     }
