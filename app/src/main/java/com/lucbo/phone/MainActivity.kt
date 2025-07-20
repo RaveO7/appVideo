@@ -27,8 +27,6 @@ import android.os.Looper
 import android.net.Uri
 import android.os.ParcelFileDescriptor
 import android.widget.LinearLayout
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.widget.ImageView
 import android.view.ViewGroup
 import android.view.LayoutInflater

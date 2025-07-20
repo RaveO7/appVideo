@@ -46,7 +46,7 @@
         </service>
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.app.phone.fileprovider"
+            android:authorities="com.lucbo.phone.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

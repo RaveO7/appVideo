@@ -21,6 +21,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatDelegate
 import android.content.SharedPreferences
+import android.view.ViewOutlineProvider
 
 class SettingsActivity : AppCompatActivity() {
     private val PERMISSION_REQUEST_CODE = 2024
@@ -51,49 +52,75 @@ class SettingsActivity : AppCompatActivity() {
         val layout = LinearLayout(this)
         layout.orientation = LinearLayout.VERTICAL
         layout.setPadding(32, 32, 32, 32)
-        layout.setBackgroundColor(Color.parseColor("#F5F6FA"))
+        // Modern UI: couleurs, coins arrondis, ombres douces
+        layout.setBackgroundColor(Color.parseColor("#F2F4F8"))
 
-        val title = TextView(this)
-        title.text = "Paramètres de l'application"
-        title.textSize = 26f
-        title.setTypeface(null, Typeface.BOLD)
-        title.setTextColor(Color.parseColor("#22223B"))
-        title.setPadding(0, 0, 0, 40)
-        layout.addView(title)
-
-        allPermissions.forEach { (perm, label, iconRes) ->
-            // Adapter la logique selon la version Android et la permission
+        // Vérifier s'il reste des permissions à afficher
+        val permissionsToRequest = allPermissions.filter { (perm, _, _) ->
             val status = when (perm) {
                 android.Manifest.permission.READ_MEDIA_IMAGES, android.Manifest.permission.READ_MEDIA_VIDEO ->
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
                         ContextCompat.checkSelfPermission(this, perm) == PackageManager.PERMISSION_GRANTED
-                    else true // Pas concerné avant TIRAMISU
+                    else true
                 android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE ->
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU)
                         ContextCompat.checkSelfPermission(this, perm) == PackageManager.PERMISSION_GRANTED
-                    else true // Plus utilisé après TIRAMISU
+                    else true
                 android.Manifest.permission.FOREGROUND_SERVICE ->
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
                         ContextCompat.checkSelfPermission(this, perm) == PackageManager.PERMISSION_GRANTED
-                    else true // Pas concerné avant P
+                    else true
                 else -> ContextCompat.checkSelfPermission(this, perm) == PackageManager.PERMISSION_GRANTED
             }
+            !status && perm != android.Manifest.permission.FOREGROUND_SERVICE
+        }
+
+        if (permissionsToRequest.isNotEmpty()) {
+            val title = TextView(this)
+            title.text = "Paramètres de l'application"
+            title.textSize = 28f
+            title.setTypeface(null, Typeface.BOLD)
+            title.setTextColor(Color.parseColor("#22223B"))
+            title.setPadding(0, 0, 0, 48)
+            layout.addView(title)
+        }
+
+        permissionsToRequest.forEach { (perm, label, iconRes) ->
+            val status = when (perm) {
+                android.Manifest.permission.READ_MEDIA_IMAGES, android.Manifest.permission.READ_MEDIA_VIDEO ->
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+                        ContextCompat.checkSelfPermission(this, perm) == PackageManager.PERMISSION_GRANTED
+                    else true
+                android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE ->
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU)
+                        ContextCompat.checkSelfPermission(this, perm) == PackageManager.PERMISSION_GRANTED
+                    else true
+                android.Manifest.permission.FOREGROUND_SERVICE ->
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
+                        ContextCompat.checkSelfPermission(this, perm) == PackageManager.PERMISSION_GRANTED
+                    else true
+                else -> ContextCompat.checkSelfPermission(this, perm) == PackageManager.PERMISSION_GRANTED
+            }
+            if (status || perm == android.Manifest.permission.FOREGROUND_SERVICE) return@forEach
 
             val card = LinearLayout(this)
             card.orientation = LinearLayout.HORIZONTAL
-            card.setPadding(36, 36, 36, 36)
+            card.setPadding(48, 40, 48, 40)
             card.setBackgroundColor(Color.WHITE)
-            card.elevation = 8f
+            card.elevation = 16f
             val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-            params.setMargins(0, 0, 0, 36)
+            params.setMargins(0, 0, 0, 40)
             card.layoutParams = params
             card.gravity = Gravity.CENTER_VERTICAL
             card.setBackgroundResource(android.R.drawable.dialog_holo_light_frame)
+            card.background = resources.getDrawable(android.R.drawable.dialog_holo_light_frame, null)
+            card.clipToOutline = true
+            card.outlineProvider = ViewOutlineProvider.BACKGROUND
 
             val icon = ImageView(this)
             icon.setImageResource(iconRes)
-            val iconParams = LinearLayout.LayoutParams(90, 90)
-            iconParams.setMargins(0, 0, 36, 0)
+            val iconParams = LinearLayout.LayoutParams(110, 110)
+            iconParams.setMargins(0, 0, 48, 0)
             icon.layoutParams = iconParams
             card.addView(icon)
 
@@ -103,16 +130,16 @@ class SettingsActivity : AppCompatActivity() {
 
             val labelView = TextView(this)
             labelView.text = label
-            labelView.textSize = 20f
+            labelView.textSize = 22f
             labelView.setTypeface(null, Typeface.BOLD)
-            labelView.setTextColor(Color.parseColor("#22223B"))
+            labelView.setTextColor(Color.parseColor("#1A237E"))
             textBlock.addView(labelView)
 
             val statusView = TextView(this)
             statusView.text = if (status) "Autorisé" else "Refusé"
             statusView.textSize = 16f
-            statusView.setTypeface(null, Typeface.BOLD)
-            statusView.setPadding(0, 10, 0, 0)
+            statusView.setTypeface(null, Typeface.NORMAL)
+            statusView.setPadding(0, 12, 0, 0)
             statusView.setTextColor(if (status) Color.parseColor("#388E3C") else Color.parseColor("#D32F2F"))
             textBlock.addView(statusView)
 
@@ -121,10 +148,13 @@ class SettingsActivity : AppCompatActivity() {
             if (!status && perm != android.Manifest.permission.FOREGROUND_SERVICE) {
                 val btn = Button(this)
                 btn.text = "Autoriser"
-                btn.textSize = 15f
-                btn.setPadding(32, 0, 32, 0)
-                btn.setBackgroundColor(Color.parseColor("#4F8EF7"))
+                btn.textSize = 16f
+                btn.setPadding(48, 0, 48, 0)
+                btn.setBackgroundColor(Color.parseColor("#1976D2"))
                 btn.setTextColor(Color.WHITE)
+                btn.background = resources.getDrawable(android.R.drawable.btn_default, null)
+                btn.setAllCaps(false)
+                btn.stateListAnimator = null
                 btn.setOnClickListener {
                     if (perm == android.Manifest.permission.READ_MEDIA_IMAGES || perm == android.Manifest.permission.READ_MEDIA_VIDEO) {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -149,24 +179,36 @@ class SettingsActivity : AppCompatActivity() {
                         Toast.makeText(this, "Pour accorder la permission, allez dans les paramètres de l'application.", Toast.LENGTH_LONG).show()
                     }
                 }
+                btn.setBackgroundResource(android.R.drawable.btn_default)
+                btn.background = resources.getDrawable(android.R.drawable.btn_default, null)
+                btn.clipToOutline = true
                 card.addView(btn)
             }
             layout.addView(card)
         }
 
+        // Séparateur visuel avant la section "À propos"
+        val sep = View(this)
+        sep.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 4)
+        sep.setBackgroundColor(Color.parseColor("#E0E0E0"))
+        sep.setPadding(0, 32, 0, 32)
+        layout.addView(sep)
+
         scroll.addView(layout)
 
-        // Section "À propos et options"
+        // Section "À propos et options" modernisée
         val aboutCard = LinearLayout(this)
         aboutCard.orientation = LinearLayout.VERTICAL
-        aboutCard.setPadding(36, 36, 36, 36)
+        aboutCard.setPadding(48, 48, 48, 48)
         aboutCard.setBackgroundColor(Color.WHITE)
-        aboutCard.elevation = 8f
+        aboutCard.elevation = 16f
+        aboutCard.background = resources.getDrawable(android.R.drawable.dialog_holo_light_frame, null)
+        aboutCard.clipToOutline = true
+        aboutCard.outlineProvider = ViewOutlineProvider.BACKGROUND
         val aboutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-        aboutParams.setMargins(0, 0, 0, 36)
+        aboutParams.setMargins(0, 0, 0, 40)
         aboutCard.layoutParams = aboutParams
 
-        // Version
         val versionView = TextView(this)
         val versionName = try {
             packageManager.getPackageInfo(packageName, 0).versionName
