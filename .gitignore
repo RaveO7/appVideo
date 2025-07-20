@@ -1,0 +1,69 @@
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Log/OS files
+*.log
+*.swp
+.DS_Store
+Thumbs.db
+
+# Android Studio
+.idea/
+*.iml
+
+# Build output
+app/build/
+
+# Kotlin/Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Generated files
+app/build/
+app/.cxx/
+app/.externalNativeBuild/
+app/.gradle/
+app/.idea/
+app/.DS_Store
+
+# Misc
+*.apk
+*.ap_*
+*.dex
+*.class
+*.apk
+*.ap_*
+*.cxx/
+*.hprof
+
+# Ignore annotation processor generated files
+app/build/intermediates/annotation_processor_list/
+
+# Ignore intermediate files
+app/build/intermediates/
+app/build/outputs/
+app/build/tmp/
+
+# Ignore test reports
+app/build/reports/
+
+# Ignore local test results
+app/build/test-results/
+
+# Ignore NDK build folders
+app/.externalNativeBuild/
+
+# Ignore signing files
+*.jks
+*.keystore
+
+# Ignore crashlytics
+crashlytics-build.properties
+fabric.properties 
