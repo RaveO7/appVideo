@@ -67,3 +67,7 @@ app/.externalNativeBuild/
 # Ignore crashlytics
 crashlytics-build.properties
 fabric.properties 
+
+# Ignore launcher icons
+app/src/main/res/mipmap*/ic_launcher.png
+app/src/main/res/mipmap*/ic_launcher_round.png

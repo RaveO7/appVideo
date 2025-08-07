@@ -121,34 +121,46 @@ class VideoRecordService : Service() {
             surfaceTexture.setDefaultBufferSize(videoSize.width, videoSize.height)
             surface = Surface(surfaceTexture)
 
-            cameraManager.openCamera(cameraId, object : CameraDevice.StateCallback() {
-                override fun onOpened(camera: CameraDevice) {
-                    cameraDevice = camera
-                    val surfaces = listOf(mediaRecorder!!.surface, surface!!)
-                    camera.createCaptureSession(surfaces, object : CameraCaptureSession.StateCallback() {
-                        override fun onConfigured(session: CameraCaptureSession) {
-                            cameraSession = session
-                            val builder = camera.createCaptureRequest(CameraDevice.TEMPLATE_RECORD)
-                            builder.addTarget(mediaRecorder!!.surface)
-                            builder.addTarget(surface!!)
-                            session.setRepeatingRequest(builder.build(), null, null)
-                            mediaRecorder?.start()
+            // Correction : vérifier la permission CAMERA avant d'ouvrir la caméra
+            if (checkSelfPermission(android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                try {
+                    cameraManager.openCamera(cameraId, object : CameraDevice.StateCallback() {
+                        override fun onOpened(camera: CameraDevice) {
+                            cameraDevice = camera
+                            val surfaces = listOf(mediaRecorder!!.surface, surface!!)
+                            camera.createCaptureSession(surfaces, object : CameraCaptureSession.StateCallback() {
+                                override fun onConfigured(session: CameraCaptureSession) {
+                                    cameraSession = session
+                                    val builder = camera.createCaptureRequest(CameraDevice.TEMPLATE_RECORD)
+                                    builder.addTarget(mediaRecorder!!.surface)
+                                    builder.addTarget(surface!!)
+                                    session.setRepeatingRequest(builder.build(), null, null)
+                                    mediaRecorder?.start()
+                                }
+                                override fun onConfigureFailed(session: CameraCaptureSession) {
+                                    stopSelf()
+                                }
+                            }, null)
                         }
-                        override fun onConfigureFailed(session: CameraCaptureSession) {
+                        override fun onDisconnected(camera: CameraDevice) {
+                            camera.close()
+                            cameraDevice = null
+                        }
+                        override fun onError(camera: CameraDevice, error: Int) {
+                            camera.close()
+                            cameraDevice = null
                             stopSelf()
                         }
                     }, null)
-                }
-                override fun onDisconnected(camera: CameraDevice) {
-                    camera.close()
-                    cameraDevice = null
-                }
-                override fun onError(camera: CameraDevice, error: Int) {
-                    camera.close()
-                    cameraDevice = null
+                } catch (se: SecurityException) {
+                    // Gestion du cas où la permission est révoquée à l'exécution
+                    Log.e("VideoRecordService", "Permission CAMERA révoquée à l'exécution", se)
                     stopSelf()
                 }
-            }, null)
+            } else {
+                Log.e("VideoRecordService", "Permission CAMERA non accordée")
+                stopSelf()
+            }
         } catch (e: Exception) {
             Log.e("VideoRecordService", "Erreur lors du démarrage de l'enregistrement", e)
             android.os.Handler(mainLooper).post {
@@ -235,6 +247,14 @@ class VideoRecordService : Service() {
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .build()
         val notificationManager = getSystemService(NotificationManager::class.java)
-        notificationManager.notify(2, notification)
+        // Vérification stricte juste avant notify + protection SecurityException
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||
+            checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+            try {
+                notificationManager.notify(2, notification)
+            } catch (se: SecurityException) {
+                Log.e("VideoRecordService", "POST_NOTIFICATIONS permission denied at runtime", se)
+            }
+        }
     }
 } 
